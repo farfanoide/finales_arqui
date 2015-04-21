@@ -1,0 +1,5 @@
+1-Finalidad de las interrupciones. Para que se utiliza un controlado de interrupciones.
+2-Describir la estructura de un modulo de E/S. ¿Que es DMA y como funciona?
+3-¿Que es la segmentación de cause? Describir técnicas para el tratamiento de saltos condicionales. 
+4- Cache: mencione algoritmos de reemplazo y políticas de escritura.
+5-Describa las características que diferencian a los procesadores RISC respecto de los CISC.
