@@ -109,13 +109,92 @@ operaciones de E/S
 Cache
 -----
 
-  * Describa algoritmos de ubicacion y politica de escritura en cache.
-  * Funciones de correspondencia entre memoria y memoria cache. Politicas de
-    escritura desde el punto de vista de la coherencia de datos.
-  * Describa las tecnicas de reemplazo de bloque, correspondencia y politicas
-    de escritura en memoria cache.
-  * Describa que se debe tener en cuenta para diseñar una cache(TODO).
-  * Analice ventajas y desventajas de tener varios niveles de cache.
+1. Describa que se debe tener en cuenta para diseñar una cache(TODO).
+
+El objetivo de la memoria cache es lograr que la velocidad de la memoria sea lo
+mas rapida posible, consiguiendo al mismo tiempo un tamaño grande al precio de
+memorias semiconductoras menos costosas.
+
+Propiedades a cumplir
+* Inclusión: Los datos almacenados en un nivel han de estar almacenados en los
+  niveles inferiores a él
+* Coherencia: Las copias de la misma información en los distintos niveles deben
+  contener los mismos valores.
+
+Tamaño de Cache: si bien es tentador incrementar el tamaño de la cache para
+mejorar las prestaciones, nos vemos restringidos no solo por los elevados
+costos sino tambien por otras limitaciones como por ejemplo el hecho que las
+memorias caches mas grandes tienden a ser mas lentas que otras mas pequeñas
+manufacturadas con los mismos materiales e incluso ubicadas en los mismos
+lugares. esto se debe a que al incrementar el tamaño tambien incrementa el
+circuiterio necesario para comunicarlas.
+Es imposible predecir un tamaño **optimo** ya que las prestaciones de una
+memoria cache son muy sensibles a las tareas desempeñadas por la misma.
+
+Funciones de correspondencia:
+
+  * Directa: Consiste en hacer corresponder cada bloque de memoria principal a
+      solo una linea de cache. es la tecnica mas sencilla. se implementa
+      facilmente utilizando la direccion. desde el punto de vista del acceso a
+      cache, cada direccion de memoria ppal puede verse como dividida en tres
+      campos: etiqueta, linea, palabra. Su principal desventaja es que hay una
+      posicion concreta de cache para cada bloque dado.(dar ejemplo de
+      thrashing)
+
+  * Asociativa: Supera las desventajas de la directa permitiendo que cada
+      bloque de memoria ppal pueda cargarse en cualquier linea de la cache. La
+      direccion de memoria se interpreta tan solo como una etiqueta y un campo
+      de palabra. el campo de etiqueta identifica univocamente un bloque de
+      memoria ppal y para determinar si se encuentra en la cache se examina
+      simultaneamente todas las etiquetas de lineas. esto marca su ppal
+      desventaja ya que para lograr dicha busqueda en paralelo se precisa
+      circuiteria de mayor cantidad y en mayor cantidad.
+
+  * Asociativa por conjuntos: Es un hibrido entra la directa y la asociativa,
+      es decir, recoge las aspectos positivos de ellas sin presentar sus
+      desventajas. en este caso la direccion nuevamente se divide en tres
+      campos, los cuales referencian etiqueta, conjunto, palabra. con este
+      metodo la etiqueta es mucho mas corta y solo se compara con las etiquetas
+      del conjunto al que pertenece.
+
+  Algoritmos de sustitucion:
+
+  * FIFO: El primero en entrar sera el primero en salir.
+  * LRU (Least Recently Used): Se sustituye el bloque que se ha mantenido en la
+      cache por mas tiempo sin haber sido referenciado.
+  * LFU (Least Frequently Used): Se sustituye aquel bloque del conjunto que ha
+      experimentado menos referencias.
+  * RANDOM: Se toma una linea al azar. Sorprendentemente presenta prestaciones
+      ligereamente menores a las de los anteriores algoritmos.
+
+  Politicas de Escritura: antes de que pueda ser reemplazado un bloque q este
+  en una linea de cache es necesario comprobar si se ha alterado en cache pero
+  no en memoria ppal. si no lo ha sido, puede escribirse sobre la cache. si ha
+  sido modificado esto significa que se ha realizado al menos una operacion de
+  escritura sobre una palabra, lo cual implica que dicha informacion debe ser
+  actualizada en memoria ppal.
+    * Inmediata: la operacion de escritura se hace tanto en cache como en
+      memoria ppal.
+      Desventajas: genera trafico sustancial a memoria.
+    * Post Escritura: las actualizaciones se hacen solo en cache. cuando tiene
+      lugar una actualizacion se activa un bit 'actualizar' asociado a la
+      linea. cuando el bloque es sustituido, se comprueba el estado de dicho
+      bit para definir si debe ser actualizado en memoria ppal.
+      Desventajas: el bloque de memoria ppal se mantiene desactualizado,
+      obligando a modulos de E/S a acceder a memoria a traves de la cache, lo
+      cual complica la circuiteria y genera potencialmente un cuello de
+      botella.
+
+Tamaño de Linea:
+
+
+
+* Describa algoritmos de ubicacion y politica de escritura en cache.
+* Funciones de correspondencia entre memoria y memoria cache. Politicas de
+  escritura desde el punto de vista de la coherencia de datos.
+* Describa las tecnicas de reemplazo de bloque, correspondencia y politicas
+* Analice ventajas y desventajas de tener varios niveles de cache.
+  de escritura en memoria cache.
 
 Segmentacion de Cauce
 ---------------------
