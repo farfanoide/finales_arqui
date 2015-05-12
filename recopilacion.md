@@ -10,16 +10,33 @@ Interrupciones
 
 3. Describa las distintas fuentes de interrupción que conozca.
 
-    - Programa: Generada por alguna condicion q se produce como resultado de la
-      ejecucion de una instruccion (overflow, div / cero, iinstruccion fuera de
-      espacio de memoria permitido).
-    - Temporizacion: Generadas por un temporizador interno al procesador.
-    - E/S: Generada por un controlador de E/S, para indicar la finalizacion sin
-      problemas de una operacion o para avisar de ciertas condiciones de error.
-    - Fallo de hardware: Fallo tal como una falta de potencia o un error de
-      paridad en memoria.
+  - Programa: Generada por alguna condicion q se produce como resultado de la
+    ejecucion de una instruccion (overflow, div / cero, iinstruccion fuera de
+    espacio de memoria permitido).
+
+  - Temporizacion: Generadas por un temporizador interno al procesador.
+
+  - E/S: Generada por un controlador de E/S, para indicar la finalizacion sin
+    problemas de una operacion o para avisar de ciertas condiciones de error.
+
+  - Fallo de hardware: Fallo tal como una falta de potencia o un error de
+    paridad en memoria.
 
 4. Explique caracteristicas y tratamiento de interrupciónes multiples.
+
+  Se pueden seguir dos alternativas para tratar las interrupciones múltiples.
+  La primera es desactivar las interrupciones mientras se está procesando una
+  interrupción. Una interrupción inhabilitada simplemente significa que el
+  procesador puede y debe ignorar la señal de petición de interrupción. Se si
+  produce una interrupción en ese momento, generalmente se mantiene pendiente,
+  y será examinada por el procesador una vez ésta haya activado las
+  interrupciones.
+
+  El inconveniente de este sistema es que no tiene en cuenta la prioridad
+  relativa. Es por eso que la segunda alternativa consiste en definir
+  prioridades para las interrupciones, y permitir que una interrupción de
+  prioridad más alta pueda interrumpir a un gestor de interrupción de prioridad
+  menor.
 
 Buses
 -----
