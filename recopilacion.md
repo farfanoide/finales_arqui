@@ -26,23 +26,24 @@ Buses
 
 1. Que es un Bus, tipos de buses, temporizacion y metodos de arbitraje
 
-      > Un bus es un camino de comunicacion (hardware) entre dos o mas
+      Un bus es un camino de comunicacion (hardware) entre dos o mas
       dispositivos.
 
       Tipos de buses:
-        * Dedicado: Una linea de bus dedicada esta permanentemente asignada a
-          una funcion o a un subconjunto fisico de componentes de computador.
-        * Multiplexado: en un bus multiplexado se transmiten tanto los datos
-          como las direcciones por la misma via, impidiendo que las
-          transmisiones puedan hacerse en paralelo. Tambien implica el uso de
-          una señal extra
+
+      * Dedicado: Una linea de bus dedicada esta permanentemente asignada a
+        una funcion o a un subconjunto fisico de componentes de computador.
+
+      * Multiplexado: en un bus multiplexado se transmiten tanto los datos
+        como las direcciones por la misma via, impidiendo que las transmisiones
+        puedan hacerse en paralelo. Tambien implica el uso de una señal extra.
 
       Metodos de arbitraje:
 
       * Centralizado: Un unico dispositivo de hardware (arbitro o controlador
-        del bus) es responsable de asignar tiempos en el bus. Dicho
-        dispositivo puede estar integrado en el procesador o ser un modulo
-        separado.
+        del bus) es responsable de asignar tiempos en el bus. Dicho dispositivo
+        puede estar integrado en el procesador o ser un modulo separado.
+
       * Distribuido: Cada dispositivo cuenta con la logica necesaria para
         controlar el acceso al bus. Los modulos actuan conjuntamente para
         compartir el bus.
@@ -51,15 +52,65 @@ Buses
       odulo E/S) como maestro, el cual podra iniciar una transferencia de datos
       on otro dispositivo (esclavo).
 
-      Temporizacion: El termino temporizacion hace referencia a la forma en la
-      que se coordinan los eventos en el bus. Los buses utilizan temporizacion
+      Temporizacion:
+
+      El termino temporizacion hace referencia a la forma en la que se
+      coordinan los eventos en el bus. Los buses utilizan temporizacion
       sincrona o asincrona.
 
       * Sincrona: la presencia de un evento esta dada por un reloj.
       * Asincrona: la presencia de un evento en el bus es consecuencia y
-        depende (si o si) de que se produzca un evento previo.
+        __depende__ de que se produzca un evento previo.
+
+      Anchura del Bus: afecta las prestaciones del sistema: cuanto mas ancho es
+      el bus de datos, mayor es el nro de bits que se transmiten a la vez. con
+      respecto a la anchura del bus de direcciones: cuanto mas ancho sea, mayor
+      es el rango de posiciones que se puede referenciar.
 
 2. Jerarquia de buses.
+
+  Si se conecta un gran número de dispositivos al bus, las prestaciones pueden
+  disminuir. Hay dos causas principales:
+
+  1. Cuanto más dispositivos se conectan al bus, mayor es el retardo de propagación.
+
+  2. El bus puede convertirse en un cuello de botella a medida que las peticiones de transferencia acumuladas se aproximan a la capacidad del bus. Sin embargo, este problema se puede resolver, por ejemplo, incrementando el bus de datos.
+
+  Por consiguiente, la mayoría de las computadoras utilizan varios buses,
+  normalmente organizados jerárquicamente.
+
+  Una estructura típica es donde hay un bus local que conecta el procesador a
+  la memoria cache. El controlador de memoria cache conecta la cache no sólo al
+  bus local, sino también al bus del sistema, donde se conectan todos los
+  módulos de memoria principal. Es posible conectar controladores de E/S
+  directamente al bus del sistema. Una solución más eficiente consiste en
+  utilizar uno o más buses de expansión. La interfaz del bus de expansión
+  regula las transferencias de datos entre el bus del sistema y los
+  controladores conectados al bus de expansión. Esta disposición permite
+  conectar al sistema una amplia variedad de dispositivos de E/S.
+
+  Esta arquitectura de buses tradicional es razonablemente eficiente, pero
+  muestra su debilidad a medida que los dispositivos de E/S ofrecen
+  prestaciones cada vez mayores. La respuesta a esta situación, ha sido
+  proponer un bus de alta velocidad.
+
+  En este caso, hay un bus local que conecta el procesador a un controlador de
+  cache, que a su vez está conectado al bus de sistema que soporta a la memoria
+  principal. El controlador de cache está integrado junto con el adaptador, que
+  permite la conexión al bus de alta velocidad. Éste último es un bus diseñado
+  específicamente para conectar dispositivos de E/S de alta capacidad. Los
+  dispositivos de velocidad menor pueden conectarse al bus de expansión, que
+  utiliza una interfaz para adaptar el tráfico entre el bus de expansión y el
+  bus de alta velocidad.
+
+  La ventaja de esta organización es que el bus de alta velocidad acerca al
+  procesador los dispositivos que exigen prestaciones elevadas, y al mismo
+  tiempo, es independiente del procesador.
+
+  ![arquitectura de entre planta](img/arquitectura_entreplanta.jpg)
+
+
+
 3. Mencione diferencias entres bus PCI y bus SCSI.
 
 E/S - DMA
