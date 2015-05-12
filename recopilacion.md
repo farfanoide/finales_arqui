@@ -6,7 +6,34 @@ Interrupciones
 
 1. Explique el mecanismo de interrupción.
 
+  Para permitir el uso de interrupciones, se añade un ciclo de interrupción al
+  ciclo de instrucción. En el ciclo de interrupción, el procesador comprueba si
+  se ha generado alguna interrupción, indicada por la presencia de una señal de
+  interrupción. Si no hay señales de interrupción pendientes, el procesador
+  continúa con el ciclo de captación y accede a la siguiente instrucción del
+  programa en curso. Si hay alguna interrupción pendiente, el procesador hace
+  lo siguiente:
+
+  1. Suspende la ejecución del programa en curso y guarda su contexto. Esto
+     significa almacenar el contenido actual del contador de programa, que
+     contiene la dirección de la siguiente instrucción y el registro palabra de
+     estado.
+  2. Carga el contador de programa con la dirección de comienzo de una rutina
+     de gestión de interrupción.
+
+  A continuación, el procesador prosigue con el ciclo de captación y accede a
+  la primera instrucción del programa de gestión de interrupción, que dará
+  servicio a la interrupción. Este programa determina el origen de la misma y
+  realiza todas las acciones que sean necesarias. Cuando la rutina de gestión
+  de interrupción se completa, el procesador puede proseguir la ejecución del
+  programa de usuario en el punto en el que se interrumpió.
+
 2. Cual es la funcion de un controlador de interrupciones.
+
+  Normalmente es un programa que determina el origen de la interrupcion y
+  realiza todas las acciones necesarias. Lease: determinar que dispositivio
+  la genero asi como tambien ejecutar un programa capaz de atender dicha
+  interrupcion.
 
 3. Describa las distintas fuentes de interrupción que conozca.
 
