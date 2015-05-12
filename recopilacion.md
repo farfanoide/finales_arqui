@@ -37,7 +37,7 @@ Interrupciones
 
 3. Describa las distintas fuentes de interrupción que conozca.
 
-  - Programa: Generada por alguna condicion q se produce como resultado de la
+  - Programa: Generada por alguna condicion que se produce como resultado de la
     ejecucion de una instruccion (overflow, div / cero, iinstruccion fuera de
     espacio de memoria permitido).
 
@@ -78,9 +78,10 @@ Buses
       * Dedicado: Una linea de bus dedicada esta permanentemente asignada a
         una funcion o a un subconjunto fisico de componentes de computador.
 
-      * Multiplexado: en un bus multiplexado se transmiten tanto los datos
-        como las direcciones por la misma via, impidiendo que las transmisiones
-        puedan hacerse en paralelo. Tambien implica el uso de una señal extra.
+      * Multiplexado: en un bus multiplexado se transmiten tanto los datos como
+        las direcciones por la misma via, impidiendo que las transmisiones
+        puedan hacerse en paralelo. Tambien implica el uso de una señal extra
+        (linea de control).
 
       Metodos de arbitraje:
 
@@ -93,8 +94,8 @@ Buses
         compartir el bus.
 
       En ambos metodos el proposito es designar un dispositivo (procesador o
-      odulo E/S) como maestro, el cual podra iniciar una transferencia de datos
-      on otro dispositivo (esclavo).
+      modulo E/S) como maestro, el cual podra iniciar una transferencia de datos
+      con otro dispositivo (esclavo).
 
       Temporizacion:
 
@@ -106,50 +107,54 @@ Buses
       * Asincrona: la presencia de un evento en el bus es consecuencia y
         __depende__ de que se produzca un evento previo.
 
-      Anchura del Bus: afecta las prestaciones del sistema: cuanto mas ancho es
-      el bus de datos, mayor es el nro de bits que se transmiten a la vez. con
-      respecto a la anchura del bus de direcciones: cuanto mas ancho sea, mayor
-      es el rango de posiciones que se puede referenciar.
+      Anchura del Bus: afecta las prestaciones del sistema, cuanto mas ancho es
+      el bus de datos, mayor es el numero de bits que se transmiten a la vez.
+      Con respecto a la anchura del bus de direcciones, cuanto mas ancho sea,
+      mayor es el rango de posiciones que se puede referenciar.
 
 2. Jerarquia de buses.
 
   Si se conecta un gran número de dispositivos al bus, las prestaciones pueden
   disminuir. Hay dos causas principales:
 
-  1. Cuanto más dispositivos se conectan al bus, mayor es el retardo de propagación.
+  1. Cuanto más dispositivos se conectan al bus, mayor es el retardo de
+     propagación.
 
-  2. El bus puede convertirse en un cuello de botella a medida que las peticiones de transferencia acumuladas se aproximan a la capacidad del bus. Sin embargo, este problema se puede resolver, por ejemplo, incrementando el bus de datos.
+  2. El bus puede convertirse en un cuello de botella a medida que las
+     peticiones de transferencia acumuladas se aproximan a la capacidad maxima
+     del mismo. Sin embargo, este problema se puede resolver, en cierta media,
+     incrementando la velocidad de transferencia o la anchura del bus de datos.
 
   Por consiguiente, la mayoría de las computadoras utilizan varios buses,
   normalmente organizados jerárquicamente.
 
-  Una estructura típica es donde hay un bus local que conecta el procesador a
-  la memoria cache. El controlador de memoria cache conecta la cache no sólo al
-  bus local, sino también al bus del sistema, donde se conectan todos los
-  módulos de memoria principal. Es posible conectar controladores de E/S
-  directamente al bus del sistema. Una solución más eficiente consiste en
-  utilizar uno o más buses de expansión. La interfaz del bus de expansión
-  regula las transferencias de datos entre el bus del sistema y los
+  Una estructura típica es donde hay un bus local que conecta el procesador
+  a la memoria cache. El controlador de memoria cache conecta la cache no
+  sólo al bus local, sino también al bus del sistema, donde se conectan
+  todos los módulos de memoria principal. Es posible conectar controladores
+  de E/S directamente al bus del sistema. Una solución más eficiente
+  consiste en utilizar uno o más buses de expansión. La interfaz del bus de
+  expansión regula las transferencias de datos entre el bus del sistema y los
   controladores conectados al bus de expansión. Esta disposición permite
   conectar al sistema una amplia variedad de dispositivos de E/S.
 
   Esta arquitectura de buses tradicional es razonablemente eficiente, pero
-  muestra su debilidad a medida que los dispositivos de E/S ofrecen
-  prestaciones cada vez mayores. La respuesta a esta situación, ha sido
-  proponer un bus de alta velocidad.
+  muestra su debilidad a medida que los dispositivos de E/S ofrecen prestaciones
+  cada vez mayores. La respuesta a esta situación, ha sido proponer un bus de
+  alta velocidad.
 
-  En este caso, hay un bus local que conecta el procesador a un controlador de
-  cache, que a su vez está conectado al bus de sistema que soporta a la memoria
-  principal. El controlador de cache está integrado junto con el adaptador, que
-  permite la conexión al bus de alta velocidad. Éste último es un bus diseñado
-  específicamente para conectar dispositivos de E/S de alta capacidad. Los
-  dispositivos de velocidad menor pueden conectarse al bus de expansión, que
-  utiliza una interfaz para adaptar el tráfico entre el bus de expansión y el
-  bus de alta velocidad.
+  En este caso, hay un bus local que conecta el procesador a un controlador
+  de cache, que a su vez está conectado al bus de sistema que soporta a la
+  memoria principal. El controlador de cache está integrado junto con el
+  adaptador, que permite la conexión al bus de alta velocidad. Éste último es
+  un bus diseñado específicamente para conectar dispositivos de E/S de alta
+  capacidad. Los dispositivos de velocidad menor pueden conectarse al bus de
+  expansión, que utiliza una interfaz para adaptar el tráfico entre el bus de
+  expansión y el bus de alta velocidad.
 
   La ventaja de esta organización es que el bus de alta velocidad acerca al
   procesador los dispositivos que exigen prestaciones elevadas, y al mismo
-  tiempo, es independiente del procesador.
+  tiempo, es independiente del mismo.
 
   ![arquitectura de entre planta](img/arquitectura_entreplanta.jpg)
 
@@ -174,7 +179,7 @@ E/S - DMA
   recibira por un bus de datos el dispositivo al cual quiere comunicarse y la
   cantidad de palabras que espera recibir. dicha informacion es guardada en
   registros de datos y control respectivamente, los cuales funcionan como buffer
-  en caso q el modulo E/S se encuentre atendiendo un requerimiento previo.
+  en caso que el modulo E/S se encuentre atendiendo un requerimiento previo.
   Por medio de un bus de control recibira seniales acerca de la operacion
   requerida (lectura/escritura). Por ultimo, esta interfaz cuenta con un bus de
   direcciones por donde se recibira la direccion a utilizar para la transaccion.
@@ -183,14 +188,14 @@ E/S - DMA
 operaciones de E/S
 
   Tanto con E/S programada como con interrupciones el procesador es responsable
-  de extraer los datos de la memoria principal en una salida y de almacenar los datos
-  en la memoria principal en una entrada.
+  de extraer los datos de la memoria principal en una salida y de almacenar los
+  datos en la memoria principal en una entrada.
 
-  * E/S Programada: el procesador ejecuta un programa q controla directamente
+  * E/S Programada: el procesador ejecuta un programa que controla directamente
     la operacion de E/S, inlcuyendo la comprobacion de estado del dispositivo,
     el envio de una orden de lectura o escritura, asi como tambien la
     transferencia del dato. cuando el procesador envia una orden al modulo de
-    E/S debe esperar hasta q la operacion concluya (pierde este tiempo).
+    E/S debe esperar hasta que la operacion concluya (pierde este tiempo).
 
   * E/S Mediante interrupciones: el procesador proporciona la orden de E/S, continua
     ejecutando otras instucciones y es interrumppido por el modulo de E/S
@@ -260,7 +265,7 @@ Funciones de correspondencia:
   * RANDOM: Se toma una linea al azar. Sorprendentemente presenta prestaciones
       ligereamente menores a las de los anteriores algoritmos.
 
-  Politicas de Escritura: antes de que pueda ser reemplazado un bloque q este
+  Politicas de Escritura: antes de que pueda ser reemplazado un bloque que este
   en una linea de cache es necesario comprobar si se ha alterado en cache pero
   no en memoria principal. si no lo ha sido, puede escribirse sobre la cache. si ha
   sido modificado esto significa que se ha realizado al menos una operacion de
@@ -421,10 +426,10 @@ Segmentacion de Cauce
       - Prediccion de saltos
       - Salto retardado
 
-    - Precaptar el destino del salto: (hardware) una solucion sencilla es adelantar la
-        resolucion de la direccion de salto a la misma etapa de decode,
-        donde ya se puede definir q una operacion es de salto. con este
-        metodo se reduce la cantidad de paradas del cauce a solamente una.
+    - Precaptar el destino del salto: (hardware) una solucion sencilla es
+        adelantar la resolucion de la direccion de salto a la misma etapa de
+        decode, donde ya se puede definir que una operacion es de salto. con
+        este metodo se reduce la cantidad de paradas del cauce a solamente una.
 
     - Flujos Multiples: (hardware)
         Varios cauces (uno por cada opción de salto). •
@@ -448,8 +453,8 @@ Segmentacion de Cauce
 
     - Prediccion de saltos:
         soluciones estaticas:
-        - predecir q nunca se salta: supone q el salto no se producira y continuara captando instrucciones secuencialmente.
-        - predecir q siempre se salta: supone q el salto se producira y siempre captara la instruccion destino del salto.
+        - predecir que nunca se salta: supone que el salto no se producira y continuara captando instrucciones secuencialmente.
+        - predecir que siempre se salta: supone que el salto se producira y siempre captara la instruccion destino del salto.
         - predecir segun el codigo de operacion: el procesador asume que el salto se producira para ciertos codigos de operacion de bifurcacion y no para otros.
         soluciones dinamicas:
         buscan mejorar la exactitud de la prediccion, registrando la
@@ -463,7 +468,7 @@ Segmentacion de Cauce
 
 * Cuanto mejora el rendimiento?
 
-  > El máximo rendimiento  teorico es completar una instrucción con cada
+  > El máximo rendimiento teorico es completar una instrucción con cada
   > ciclo de reloj.
   > Incrementa la productividad (throughput), pero no reduce el tiempo de
   > ejecución de la instrucción
@@ -533,6 +538,6 @@ Subrutinas
   * Por Registros: es el metodo mas facil de implementar, los datos se
   guardan en los registros  y se llama a la subrutina, la cual podra
   accederlos directamente. La principal limitacion es la cantidad de
-  argumentos q se pueden pasar ya que esta intrinsecamente relacionado a
+  argumentos que se pueden pasar ya que esta intrinsecamente relacionado a
   la cantidad de registros disponibles.
 
