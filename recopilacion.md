@@ -156,8 +156,8 @@ E/S - DMA
 operaciones de E/S
 
   Tanto con E/S programada como con interrupciones el procesador es responsable
-  de extraer los datos de la memoria ppal en una salida y de almacenar los datos
-  en la memoria ppal en una entrada.
+  de extraer los datos de la memoria principal en una salida y de almacenar los datos
+  en la memoria principal en una entrada.
 
   * E/S Programada: el procesador ejecuta un programa q controla directamente
     la operacion de E/S, inlcuyendo la comprobacion de estado del dispositivo,
@@ -202,28 +202,26 @@ memoria cache son muy sensibles a las tareas desempeñadas por la misma.
 Funciones de correspondencia:
 
   * Directa: Consiste en hacer corresponder cada bloque de memoria principal a
-      solo una linea de cache. es la tecnica mas sencilla. se implementa
-      facilmente utilizando la direccion. desde el punto de vista del acceso a
-      cache, cada direccion de memoria ppal puede verse como dividida en tres
-      campos: etiqueta, linea, palabra. Su principal desventaja es que hay una
-      posicion concreta de cache para cada bloque dado.(dar ejemplo de
-      thrashing)
+  solo una linea de cache. es la tecnica mas sencilla. se implementa facilmente
+  utilizando la direccion. desde el punto de vista del acceso a cache, cada
+  direccion de memoria principal puede verse como dividida en tres campos: etiqueta,
+  linea, palabra. Su principal desventaja es que hay una posicion concreta de
+  cache para cada bloque dado.(dar ejemplo de thrashing)
 
-  * Asociativa: Supera las desventajas de la directa permitiendo que cada
-      bloque de memoria ppal pueda cargarse en cualquier linea de la cache. La
-      direccion de memoria se interpreta tan solo como una etiqueta y un campo
-      de palabra. el campo de etiqueta identifica univocamente un bloque de
-      memoria ppal y para determinar si se encuentra en la cache se examina
-      simultaneamente todas las etiquetas de lineas. esto marca su ppal
-      desventaja ya que para lograr dicha busqueda en paralelo se precisa
-      circuiteria de mayor cantidad y en mayor cantidad.
+  * Asociativa: Supera las desventajas de la directa permitiendo que cada bloque
+  de memoria principal pueda cargarse en cualquier linea de la cache. La direccion
+  de memoria se interpreta tan solo como una etiqueta y un campo de palabra. el
+  campo de etiqueta identifica univocamente un bloque de memoria principal y para
+  determinar si se encuentra en la cache se examina simultaneamente todas las
+  etiquetas de lineas. esto marca su principal desventaja ya que para lograr dicha
+  busqueda en paralelo se precisa circuiteria de mayor cantidad y en mayor
+  cantidad.
 
-  * Asociativa por conjuntos: Es un hibrido entra la directa y la asociativa,
-      es decir, recoge las aspectos positivos de ellas sin presentar sus
-      desventajas. en este caso la direccion nuevamente se divide en tres
-      campos, los cuales referencian etiqueta, conjunto, palabra. con este
-      metodo la etiqueta es mucho mas corta y solo se compara con las etiquetas
-      del conjunto al que pertenece.
+  * Asociativa por conjuntos: Es un hibrido entra la directa y la asociativa, es
+  decir, recoge las aspectos positivos de ellas sin presentar sus desventajas.
+  en este caso la direccion nuevamente se divide en tres campos, los cuales
+  referencian etiqueta, conjunto, palabra. con este metodo la etiqueta es mucho
+  mas corta y solo se compara con las etiquetas del conjunto al que pertenece.
 
   Algoritmos de sustitucion:
 
@@ -237,23 +235,84 @@ Funciones de correspondencia:
 
   Politicas de Escritura: antes de que pueda ser reemplazado un bloque q este
   en una linea de cache es necesario comprobar si se ha alterado en cache pero
-  no en memoria ppal. si no lo ha sido, puede escribirse sobre la cache. si ha
+  no en memoria principal. si no lo ha sido, puede escribirse sobre la cache. si ha
   sido modificado esto significa que se ha realizado al menos una operacion de
   escritura sobre una palabra, lo cual implica que dicha informacion debe ser
-  actualizada en memoria ppal.
-    * Inmediata: la operacion de escritura se hace tanto en cache como en
-      memoria ppal.
-      Desventajas: genera trafico sustancial a memoria.
-    * Post Escritura: las actualizaciones se hacen solo en cache. cuando tiene
-      lugar una actualizacion se activa un bit 'actualizar' asociado a la
-      linea. cuando el bloque es sustituido, se comprueba el estado de dicho
-      bit para definir si debe ser actualizado en memoria ppal.
-      Desventajas: el bloque de memoria ppal se mantiene desactualizado,
-      obligando a modulos de E/S a acceder a memoria a traves de la cache, lo
-      cual complica la circuiteria y genera potencialmente un cuello de
-      botella.
+  actualizada en memoria principal.
 
-Tamaño de Linea:
+    * Inmediata: la operacion de escritura se hace tanto en cache como en
+    memoria principal. Desventajas: genera trafico sustancial a memoria.
+
+    * Post Escritura: las actualizaciones se hacen solo en cache. cuando tiene
+    lugar una actualizacion se activa un bit 'actualizar' asociado a la linea.
+    cuando el bloque es sustituido, se comprueba el estado de dicho bit para
+    definir si debe ser actualizado en memoria principal. Desventajas: el bloque
+    de memoria principal se mantiene desactualizado, obligando a modulos de E/S a
+    acceder a memoria a traves de la cache, lo cual complica la circuiteria y
+    genera potencialmente un cuello de botella.
+
+Tamaño de línea.
+
+Cuando se recupera y ubica en caché un bloque de datos, se recuperan no sólo
+la palabra deseada, sino además algunas palabras adyacentes. A medida que
+aumenta el tamaño de bloque, la tasa de aciertos primero aumenta debido al
+principio de localidad y más datos útiles son llevados a la caché. Sin
+embargo, la tasa de aciertos comenzará a decrecer.
+
+Dos efectos concretos entran en juego:
+
+  *  Bloques más grandes reducen el número de bloques que caben en la caché.
+
+  * A medida que un bloque se hace más grande, cada palabra adicional está
+  más lejos de la requerida, y por tanto es más improbable que sea necesaria a
+  corto plazo.
+
+Un tamaño entre 4 y 8 unidades direccionables parece estar razonablemente
+próximo al óptimo número de cachés.
+
+Cuando se introdujeron originalmente las cachés, un sistema tenía sólo una
+caché. Más recientemente, se ha convertido en una norma el uso de múltiples
+cachés.
+
+Ha sido posible tener una caché en el mismo chip del procesador, reduciendo
+la actividad del bus externo del procesador y los tiempos de ejecución e
+incrementando las prestaciones globales de sistema. Cuando la instrucción o
+dato requeridos se encuentran en la caché on-chip, se elimina el acceso al bus.
+Los accesos a la caché on-chip se efectúan apreciablemente más rápidos que
+los ciclos de bus y durante ese período el bus está libre para realizar otras
+transferencias.
+
+Los diseños más actuales incluyen tanto caché on-chip como externa. La
+estructura resultante se conoce como caché de dos niveles. Si no hay caché 2
+y el procesador hace una petición de acceso a una posición de memoria que no
+está en la caché 1, entonces el procesador debe acceder a la RAM o la ROM a
+través del bus, obteniendo bajas prestaciones.
+
+Si se utiliza una caché 2, entonces, con frecuencia, la información puede
+recuperarse fácilmente. La mejora potencial del uso de una caché de dos
+niveles depende de las tasas de aciertos en ambas cachés. En general, el uso de
+un segundo nivel de caché mejora las prestaciones.
+
+¿Unificada o partida?
+
+Al principio, se usaba una sola caché para almacenar las referencias, tanto a
+datos como a instrucciones. Actualmente se ha hecho normal separar la caché en
+dos: una dedicada a instrucciones y otra a datos.
+
+Una caché unificada tiene varias ventajas potenciales:
+
+* Para un tamaño dado de caché, una unificada tiene una tasa de aciertos mayor
+que una partida, ya que nivela automáticamente la carga entre captación de
+instrucciones y de datos.
+
+* Sólo se necesita diseñar e implementar una caché.
+
+La ventaja del diseño de caché partida es que elimina la competición por la
+caché entre el procesador de instrucciones y la unidad de ejecución. Esto es
+importante en diseños que cuentan con segmentación de cauce de instrucciones.
+Esta disputa por la caché puede degradar las prestaciones, interfiriendo con el
+uso eficiente del cauce segmentado de instrucciones. La caché partida supera
+esta dificultad.
 
 
 
@@ -382,10 +441,33 @@ Segmentacion de Cauce
   > Incrementa la productividad (throughput), pero no reduce el tiempo de
   > ejecución de la instrucción
 
+Procesamiento Paralelo.
+-----------------------
 
+  Una manera tradicional de incrementar las prestaciones de un sistema consiste
+  en utilizar varios procesadores que puedan ejecutar en paralelo una carga de
+  trabajo dada. Las dos organizaciones de multiples procesadores mas comunes
+  son los multiprocesadores simetricos (SMP) y los _clusters_. Recientemente, los
+  sistemas de acceso no uniforme a memoria (NUMA) han aparecido comercialmente.
 
-Superescalares/SMP
-------------------
+  SMP: Es un computador constituido por varios procesadores similares,
+  interconectados mediante un bus o algun tipo de estructura de conmutacion. El
+  problema mas critico a resolver en un SMP es la coherencia de cache. Cada
+  procesador tiene su propia cache, y es psible que una linea de datos dada
+  este presente en mas de una cache. Si esa linea se altera en una, entonces
+  tanto la memoria principal como las otras caches tienen veersiones no validas de
+  dicha linea.
+
+  Multiprocesador Monochip: en un unico chip se implementan varios
+  procesadores. Un diseño  relacionado consiste en repetir algunos componentes
+  de un procesador para que este pueda ejecutar varias hebras concurrentemente
+  (Procesador Multihebra).
+
+  Cluster: es un grupo de computadores completos interconectados y trabajando
+  juntos como un solo recurso de computo, proporcionando la ilusion de ser una
+  unica maquina. El termino _computador completo_ significa que puede funcionar
+  autonomamente, fuera del cluster.
+
 
   * Describa las caracteristicas que diferencian los SMTP respecto a los
     clusters
