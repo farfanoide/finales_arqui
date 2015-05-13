@@ -30,15 +30,14 @@ Interrupciones
 
 2. Cual es la funcion de un controlador de interrupciones.
 
-  Normalmente es un programa que determina el origen de la interrupcion y
-  realiza todas las acciones necesarias. Lease: determinar que dispositivio
-  la genero asi como tambien ejecutar un programa capaz de atender dicha
-  interrupcion.
+  Es un programa que determina el origen de la interrupcion y realiza todas las
+  acciones necesarias. Lease: determinar que dispositivio la genero asi como
+  tambien ejecutar un programa capaz de atender dicha interrupcion.
 
 3. Describa las distintas fuentes de interrupción que conozca.
 
   - Programa: Generada por alguna condicion que se produce como resultado de la
-    ejecucion de una instruccion (overflow, div / cero, iinstruccion fuera de
+    ejecucion de una instruccion (overflow, div / cero, instruccion fuera de
     espacio de memoria permitido).
 
   - Temporizacion: Generadas por un temporizador interno al procesador.
@@ -54,10 +53,9 @@ Interrupciones
   Se pueden seguir dos alternativas para tratar las interrupciones múltiples.
   La primera es desactivar las interrupciones mientras se está procesando una
   interrupción. Una interrupción inhabilitada simplemente significa que el
-  procesador puede y debe ignorar la señal de petición de interrupción. Se si
-  produce una interrupción en ese momento, generalmente se mantiene pendiente,
-  y será examinada por el procesador una vez ésta haya activado las
-  interrupciones.
+  procesador debe ignorar la señal de petición de interrupción. Se si produce
+  una interrupción en ese momento, generalmente se mantiene pendiente, y será
+  examinada por el procesador una vez ésta haya activado las interrupciones.
 
   El inconveniente de este sistema es que no tiene en cuenta la prioridad
   relativa. Es por eso que la segunda alternativa consiste en definir
@@ -70,47 +68,43 @@ Buses
 
 1. Que es un Bus, tipos de buses, temporizacion y metodos de arbitraje
 
-      Un bus es un camino de comunicacion (hardware) entre dos o mas
-      dispositivos.
+  Un bus es un camino de comunicacion (hardware) entre dos o mas dispositivos.
 
-      Tipos de buses:
+  Tipos de buses:
 
-      * Dedicado: Una linea de bus dedicada esta permanentemente asignada a
-        una funcion o a un subconjunto fisico de componentes de computador.
+  * Dedicado: Una linea de bus dedicada esta permanentemente asignada a
+    una funcion o a un subconjunto fisico de componentes de computador.
 
-      * Multiplexado: en un bus multiplexado se transmiten tanto los datos como
-        las direcciones por la misma via, impidiendo que las transmisiones
-        puedan hacerse en paralelo. Tambien implica el uso de una señal extra
-        (linea de control).
+  * Multiplexado: en un bus multiplexado se transmiten tanto los datos como
+    las direcciones por la misma via, impidiendo que las transmisiones puedan
+    hacerse en paralelo. Tambien implica el uso de una señal extra (linea de
+    control).
 
-      Metodos de arbitraje:
+  Metodos de arbitraje:
 
-      * Centralizado: Un unico dispositivo de hardware (arbitro o controlador
-        del bus) es responsable de asignar tiempos en el bus. Dicho dispositivo
-        puede estar integrado en el procesador o ser un modulo separado.
+  * Centralizado: Un unico dispositivo de hardware (arbitro o controlador
+    del bus) es responsable de asignar tiempos en el bus. Dicho dispositivo
+    puede estar integrado en el procesador o ser un modulo separado.
 
-      * Distribuido: Cada dispositivo cuenta con la logica necesaria para
-        controlar el acceso al bus. Los modulos actuan conjuntamente para
-        compartir el bus.
+  * Distribuido: Cada dispositivo cuenta con la logica necesaria para
+    controlar el acceso al bus. Los modulos actuan conjuntamente para compartir
+    el bus.
 
-      En ambos metodos el proposito es designar un dispositivo (procesador o
-      modulo E/S) como maestro, el cual podra iniciar una transferencia de datos
-      con otro dispositivo (esclavo).
+  En ambos metodos el proposito es designar un dispositivo (procesador o modulo
+  E/S) como maestro, el cual podra iniciar una transferencia de datos con otro
+  dispositivo (esclavo).
 
-      Temporizacion:
+  Temporizacion: Hace referencia a la forma en la que se coordinan los eventos
+  en el bus. Los buses utilizan temporizacion sincrona o asincrona.
 
-      El termino temporizacion hace referencia a la forma en la que se
-      coordinan los eventos en el bus. Los buses utilizan temporizacion
-      sincrona o asincrona.
+  * Sincrona: la presencia de un evento esta dada por un reloj.
+  * Asincrona: la presencia de un evento en el bus es consecuencia y
+    __depende__ de que se produzca un evento previo.
 
-      * Sincrona: la presencia de un evento esta dada por un reloj.
-      * Asincrona: la presencia de un evento en el bus es consecuencia y
-        __depende__ de que se produzca un evento previo.
-
-      Anchura del Bus: afecta las prestaciones del sistema, cuanto mas ancho es
-      el bus de datos, mayor es el numero de bits que se transmiten a la vez.
-      Con respecto a la anchura del bus de direcciones, cuanto mas ancho sea,
-      mayor es el rango de posiciones que se puede referenciar.
+  Anchura del Bus: afecta las prestaciones del sistema, cuanto mas ancho es el
+  bus de datos, mayor es el numero de bits que se transmiten a la vez. Con
+  respecto a la anchura del bus de direcciones, cuanto mas ancho sea, mayor es
+  el rango de posiciones que se puede referenciar.
 
 2. Jerarquia de buses.
 
@@ -228,7 +222,7 @@ memorias caches mas grandes tienden a ser mas lentas que otras mas pequeñas
 manufacturadas con los mismos materiales e incluso ubicadas en los mismos
 lugares. esto se debe a que al incrementar el tamaño tambien incrementa el
 circuiterio necesario para comunicarlas.
-Es imposible predecir un tamaño **optimo** ya que las prestaciones de una
+Es imposible predecir un tamaño __optimo__ ya que las prestaciones de una
 memoria cache son muy sensibles a las tareas desempeñadas por la misma.
 
 Funciones de correspondencia:
@@ -236,18 +230,18 @@ Funciones de correspondencia:
   * Directa: Consiste en hacer corresponder cada bloque de memoria principal a
   solo una linea de cache. es la tecnica mas sencilla. se implementa facilmente
   utilizando la direccion. desde el punto de vista del acceso a cache, cada
-  direccion de memoria principal puede verse como dividida en tres campos: etiqueta,
-  linea, palabra. Su principal desventaja es que hay una posicion concreta de
-  cache para cada bloque dado.(dar ejemplo de thrashing)
+  direccion de memoria principal puede verse como dividida en tres campos:
+  etiqueta, linea, palabra. Su principal desventaja es que hay una posicion
+  concreta de cache para cada bloque dado.(dar ejemplo de thrashing)
 
-  * Asociativa: Supera las desventajas de la directa permitiendo que cada bloque
-  de memoria principal pueda cargarse en cualquier linea de la cache. La direccion
-  de memoria se interpreta tan solo como una etiqueta y un campo de palabra. el
-  campo de etiqueta identifica univocamente un bloque de memoria principal y para
-  determinar si se encuentra en la cache se examina simultaneamente todas las
-  etiquetas de lineas. esto marca su principal desventaja ya que para lograr dicha
-  busqueda en paralelo se precisa circuiteria de mayor cantidad y en mayor
-  cantidad.
+  * Asociativa: Supera las desventajas de la directa permitiendo que cada
+  bloque de memoria principal pueda cargarse en cualquier linea de la cache.
+  La direccion de memoria se interpreta tan solo como una etiqueta y un
+  campo de palabra. el campo de etiqueta identifica univocamente un bloque
+  de memoria principal y para determinar si se encuentra en la cache se
+  examina simultaneamente todas las etiquetas de lineas. esto marca su
+  principal desventaja ya que para lograr dicha busqueda en paralelo se precisa
+  circuiteria de mayor cantidad y en mayor cantidad.
 
   * Asociativa por conjuntos: Es un hibrido entra la directa y la asociativa, es
   decir, recoge las aspectos positivos de ellas sin presentar sus desventajas.
@@ -380,13 +374,15 @@ Segmentacion de Cauce
     determinada del cauce.
 
     * Lectura después de Escritura (RAW, dependencia verdadera): una
-    instrucción genera un dato que lee otra posterior
+        instrucción genera un dato que lee otra posterior
+
     * Escritura después de Escritura (WAW, dependencia en salida): una
-    instrucción escribe un dato después que otra posterior sólo se da si se
-    deja que las instrucciones se adelanten unas a otras
+        instrucción escribe un dato después que otra posterior sólo se da si se
+        deja que las instrucciones se adelanten unas a otras
+
     * Escritura después de Lectura (WAR, antidependencia): una instrucción
-    modifica un valor antes de que otra anterior que lo tiene que leer, lo
-    lea. ( no se puede dar en nuestro cauce simple )
+        modifica un valor antes de que otra anterior que lo tiene que leer, lo
+        lea. ( no se puede dar en nuestro cauce simple )
 
   * Por dependencia de control: Ocurren cuando la ejecución de una
     instrucción depende de cómo se ejecute otra (ej.: un salto y los 2
@@ -399,29 +395,36 @@ Segmentacion de Cauce
 
   Soluciones a riesgos estructurales:
   Duplicación de recursos hardware
+
   - Sumadores o restadores además de la ALU
   - Separación en memorias de instrucciones y datos
   - Turnar el acceso al banco de registros
-  - Escrituras en la 1o mitad de los ciclos de reloj • Lecturas en la 2o mitad de los ciclos de reloj
+  - Escrituras en la 1o mitad de los ciclos de reloj. Lecturas en la 2o mitad
+      de los ciclos de reloj
+
   Soluciones a riesgos de datos:
   Para riesgos RAW: se debe determinar cómo y cuando aparecen esos riesgos
 
-    * por hardware: adelantamiento de operandos. consiste en pasar directamente
+    * Por hardware: adelantamiento de operandos. consiste en pasar directamente
       el resultado obtenido con una instrucción a las instrucciones que lo
       necesitan como operando.
-      * por software: uso de instrucciones NOP o reordenamiento de instrucciones.
-      es ejecutada por el compilador. evita los riesgos reordenando las
+
+    * Por software: uso de instrucciones NOP o reordenamiento de instrucciones.
+      Es ejecutada por el compilador. evita los riesgos reordenando las
       instrucciones del código sin afectar los resultados
 
-    - Soluciones a riesgos de Control:
+  Soluciones a riesgos de Control:
+
     - para saltos incondicionales la unica solucion es resolver lo mas
         rapidamente posible la direccion de la proxima instruccion a ejecutar.
+
     - para saltos condicionales es mas complejo ya que se depende del resultado
         de la instruccion anterior para determinar el orden de ejecucion.
 
     Soluciones:
-      - Flujos Multiples
+
       - Precaptar el destino del salto
+      - Flujos Multiples
       - Buffer de bucles
       - Prediccion de saltos
       - Salto retardado
@@ -432,12 +435,11 @@ Segmentacion de Cauce
         este metodo se reduce la cantidad de paradas del cauce a solamente una.
 
     - Flujos Multiples: (hardware)
-        Varios cauces (uno por cada opción de salto). •
-        Precaptan cada salto en diferentes cauces.
-        • Se debe utilizar el cauce correcto.
-        • Desventajas:
-        • Provoca retardos en el acceso al bus y a los registros.
-        • Si hay múltiples saltos, se necesita un mayor número de cauces.
+      Varios cauces (uno por cada opción de salto).
+      Precaptan cada salto en diferentes cauces.
+      Se debe utilizar el cauce correcto.
+      Desventajas: Provoca retardos en el acceso al bus y a los registros. Si
+      hay múltiples saltos, se necesita un mayor número de cauces.
 
     - Buffer de bucles: (hardware)
         un buffer de bucles es una memoria pequeña de gran velocidad,
@@ -447,23 +449,37 @@ Segmentacion de Cauce
         el destino de salto esta en el buffer.
 
     - Salto retardado (software): se pueden mejorar las prestaciones de un
-        cauce reordenando automaticamente las instrucciones de un programa
-        de forma que las instrucciones de salto tengan lugar despues de lo
+        cauce reordenando automaticamente las instrucciones de un programa de
+        forma que las instrucciones de salto tengan lugar despues de lo
         realmente deseado.
 
     - Prediccion de saltos:
-        soluciones estaticas:
-        - predecir que nunca se salta: supone que el salto no se producira y continuara captando instrucciones secuencialmente.
-        - predecir que siempre se salta: supone que el salto se producira y siempre captara la instruccion destino del salto.
-        - predecir segun el codigo de operacion: el procesador asume que el salto se producira para ciertos codigos de operacion de bifurcacion y no para otros.
-        soluciones dinamicas:
-        buscan mejorar la exactitud de la prediccion, registrando la
-        historia de las instrucciones de bifurcadcion condicional en un
-        programa. A cada instruccion se le asocian uno o mas bits q
-        reflejen su historia reciente. dichas instrucciones pueden ser
-        guardadas en la memoria cache o alguna memoria rapida dedicada.
-        - conmutador saltar/no saltar: el procesador referencia los bits asociados a la instruccion para tomar una desicion al momento de captar la proxima instruccion.
-        - Tabla de historia de salto: similar a la tecnica previa pero agrega tmb a la tabla la direccion de la proxima instruccion o incluso puede guardar directamente la instruccion a ejecutar.
+
+      Soluciones Estaticas:
+
+      - predecir que nunca se salta: supone que el salto no se producira y
+          continuara captando instrucciones secuencialmente.
+
+      - predecir que siempre se salta: supone que el salto se producira y
+          siempre captara la instruccion destino del salto.
+
+      - predecir segun el codigo de operacion: el procesador asume que el salto
+          se producira para ciertos codigos de operacion de bifurcacion y no
+          para otros.
+
+      Soluciones Dinamicas: buscan mejorar la exactitud de la prediccion,
+      registrando la historia de las instrucciones de bifurcadcion condicional
+      en un programa. A cada instruccion se le asocian uno o mas bits que
+      reflejen su historia reciente. dichas instrucciones pueden ser guardadas
+      en la memoria cache o alguna memoria rapida dedicada.
+
+      * conmutador saltar/no saltar: el procesador referencia los bits
+          asociados a la instruccion para tomar una desicion al momento de
+          captar la proxima instruccion.
+
+      * Tabla de historia de salto: similar a la tecnica previa pero agrega
+          tambien a la tabla la direccion de la proxima instruccion o incluso
+          puede guardar directamente la instruccion a ejecutar.
 
 
 * Cuanto mejora el rendimiento?
@@ -483,12 +499,12 @@ Procesamiento Paralelo.
   sistemas de acceso no uniforme a memoria (NUMA) han aparecido comercialmente.
 
   SMP: Es un computador constituido por varios procesadores similares,
-  interconectados mediante un bus o algun tipo de estructura de conmutacion. El
-  problema mas critico a resolver en un SMP es la coherencia de cache. Cada
-  procesador tiene su propia cache, y es psible que una linea de datos dada
+  interconectados mediante un bus o algun tipo de estructura de conmutacion.
+  El problema mas critico a resolver en un SMP es la coherencia de cache. Cada
+  procesador tiene su propia cache, y es posible que una linea de datos dada
   este presente en mas de una cache. Si esa linea se altera en una, entonces
-  tanto la memoria principal como las otras caches tienen veersiones no validas de
-  dicha linea.
+  tanto la memoria principal como las otras caches tienen veersiones no validas
+  de dicha linea.
 
   Multiprocesador Monochip: en un unico chip se implementan varios
   procesadores. Un diseño  relacionado consiste en repetir algunos componentes
