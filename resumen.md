@@ -2,6 +2,7 @@ Arquitectura de computadoras.
 =============================
 
 Unidad 1: Arquitectura y organización de computadoras.
+======================================================
 
 Concepto de arquitectura y su relación con organización.
 --------------------------------------------------------
@@ -314,7 +315,7 @@ sino también los parámetros que se desean pasar al procedimiento llamado. El
 procedimiento invocado puede acceder a los parámetros en la pila. Al retornar
 los parámetros de retorno se pueden almacenar también en la pila, debajo de
 la dirección de retorno. El conjunto completo de parámetros, incluyendo la
-dirección de retorno, se denomina marco de pila. 
+dirección de retorno, se denomina marco de pila.
 
 Unidad 2: Subsistema Unidad Central de Procesos.
 ================================================
@@ -845,62 +846,75 @@ al procesador. Así pues, el procesador sólo interviene al comienzo y al final 
 la transferencia.
 
 El mecanismo de DMA puede configurarse de diversas formas:
-Bus único, DMA independiente: todos los módulos comparten el mismo bus
-del sistema. El módulo de DMA, actuando como un procesador suplementario, utiliza
-E/S programada para intercambiar datos entre la memoria y un módulo de E/S a través
-del módulo de DMA. Esta configuración es la más económica, pero es claramente
-ineficiente.
-Bus único, DMA-E/S integrados: en este caso, se integran las funciones de
-DMA y de E/S, lo que significa que existe un camino entre el módulo de DMA y uno o
-más módulos de E/S que no incluye al bus del sistema. La lógica del DMA puede ser
-parte de un módulo de E/S o puede ser un módulo separado que controla a uno o mas
-módulos de E/S.
-Bus de E/S: se conectan los módulos de E/S a un módulo de DMA mediante
-un bus de E/S. Esto reduce a uno el número de interfaces de E/S en el módulo de DMA,
-y permite una configuración fácilmente ampliable.
+
+* Bus único, DMA independiente: todos los módulos comparten el mismo bus del
+  sistema. El módulo de DMA, actuando como un procesador suplementario,
+  utiliza E/S programada para intercambiar datos entre la memoria y un módulo
+  de E/S a través del módulo de DMA. Esta configuración es la más económica,
+  pero es claramente ineficiente.
+* Bus único, DMA-E/S integrados: en este caso, se integran las funciones de DMA
+  y de E/S, lo que significa que existe un camino entre el módulo de DMA y
+  uno o más módulos de E/S que no incluye al bus del sistema. La lógica del
+  DMA puede ser parte de un módulo de E/S o puede ser un módulo separado que
+  controla a uno o mas módulos de E/S.
+* Bus de E/S: se conectan los módulos de E/S a un módulo de DMA mediante un bus
+  de E/S. Esto reduce a uno el número de interfaces de E/S en el módulo de
+  DMA, y permite una configuración fácilmente ampliable.
+
 En todos estos casos, el bus del sistema es usado por el módulo de DMA sólo para
-intercambiar datos con la memoria. El intercambio de datos entre los módulos de DMA
-y E/S se produce fuera del bus del sistema.
+intercambiar datos con la memoria. El intercambio de datos entre los módulos de
+DMA y E/S se produce fuera del bus del sistema.
 
 Canales de E/S.
+---------------
 
-Características.
+Características:
+
 El canal de E/S representa una ampliación del concepto de DMA. Un canal de E/S
-puede ejecutar instrucciones de E/S, lo que le confiere un control completo sobre las
-operaciones de E/S. En este caso, la CPU no ejecuta instrucciones de E/S; éstas se
-almacenan en memoria principal para ser ejecutadas por un procesador de uso
-específico contenido en el propio canal de E/S.
+puede ejecutar instrucciones de E/S, lo que le confiere un control completo
+sobre las operaciones de E/S. En este caso, la CPU no ejecuta instrucciones
+de E/S; éstas se almacenan en memoria principal para ser ejecutadas por un
+procesador de uso específico contenido en el propio canal de E/S.
+
 La CPU inicia una transferencia de E/S, indicando al canal de E/S que debe
-ejecutar un programa de la memoria. El programa especifica el dispositivo, el área de
-memoria para almacenamiento, la prioridad y las acciones a realizar en ciertas
-situaciones de error. El canal de E/S sigue estas instrucciones y controla la transferencia
-de datos.
+ejecutar un programa de la memoria. El programa especifica el dispositivo, el
+área de memoria para almacenamiento, la prioridad y las acciones a realizar
+en ciertas situaciones de error. El canal de E/S sigue estas instrucciones y
+controla la transferencia de datos.
+
 Son comunes dos tipos de canales de E/S:
-Un canal selector, que controla varios dispositivos de velocidad elevada y, en un
-instante dado, se dedica a transferir datos a uno de esos dispositivos. Cada dispositivo o
-grupo de dispositivos es manejado por un controlador de E/S.
-Un canal multiplexor puede manejar las E/S de varios dispositivos al mismo
-tiempo. Para dispositivos de velocidad reducida, un multiplexor de a byte acepta o
-transmite caracteres tan rápido como es posible a varios dispositivos. Para dispositivos
-de velocidad elevada, un multiplexor de bloque entrelaza bloques de datos de los
-distintos dispositivos.
+
+* Un canal selector, que controla varios dispositivos de velocidad elevada y,
+  en un instante dado, se dedica a transferir datos a uno de esos
+  dispositivos. Cada dispositivo o grupo de dispositivos es manejado por un
+  controlador de E/S.
+* Un canal multiplexor puede manejar las E/S de varios dispositivos al mismo
+  tiempo. Para dispositivos de velocidad reducida, un multiplexor de a byte
+  acepta o transmite caracteres tan rápido como es posible a varios
+  dispositivos. Para dispositivos de velocidad elevada, un multiplexor de
+  bloque entrelaza bloques de datos de los distintos dispositivos.
 
 La interfaz externa.
+--------------------
 
-Tipos de interfaces.
-La interfaz entre el periférico y el módulo de E/S debe ajustarse a la naturaleza y
-la forma de funcionar del periférico. Una de las principales características de la interfaz
-es si es serie o paralela. En una interfaz paralela, hay varias líneas que conectan el
-módulo de E/S y el periférico, y se transfieren varios bits simultáneamente a través del
-bus de datos. En una interfaz serie, hay sólo una línea para transmitir los datos, y los
-bits deben transmitirse uno a uno. Las interfaces paralelas se utilizan usualmente para
-los dispositivos de alta velocidad, como una cinta o un disco. Las serie son más propias
-de impresoras y terminales.
-La transmisión serial es más lenta que la paralela puesto que se envía un bit a la
-vez. Una ventaja significativa de la transmisión serial en relación a la paralela es un
-menor costo del cableado puesto que se necesita un solo cable. Este ahorro en costo se
-vuelve más significativo conforme sean mayores las distancias requeridas para la
-comunicación.
+Tipos de interfaces:
+
+La interfaz entre el periférico y el módulo de E/S debe ajustarse a la
+naturaleza y la forma de funcionar del periférico. Una de las principales
+características de la interfaz es si es serie o paralela. En una interfaz
+paralela, hay varias líneas que conectan el módulo de E/S y el periférico, y
+se transfieren varios bits simultáneamente a través del bus de datos. En una
+interfaz serie, hay sólo una línea para transmitir los datos, y los bits deben
+transmitirse uno a uno. Las interfaces paralelas se utilizan usualmente para los
+dispositivos de alta velocidad, como una cinta o un disco. Las serie son más
+propias de impresoras y terminales.
+
+La transmisión serial es más lenta que la paralela puesto que se envía un bit
+a la vez. Una ventaja significativa de la transmisión serial en relación a la
+paralela es un menor costo del cableado puesto que se necesita un solo cable.
+Este ahorro en costo se vuelve más significativo conforme sean mayores las
+distancias requeridas para la comunicación.
+
 Otra ventaja importante de la transmisión serial es la habilidad de transmitir a
 través de líneas telefónicas convencionales a mucha distancia, mientras que la
 transmisión en paralelo esta limitada en distancia en un rango de metros.
@@ -908,200 +922,223 @@ transmisión en paralelo esta limitada en distancia en un rango de metros.
 En cualquier caso, el módulo de E/S debe establecer un diálogo con el periférico
 como el que sigue:
 
-El módulo de E/S envía una señal de control solicitando permiso para enviar
-datos.
-
-El periférico reconoce la solicitud.
-El módulo de E/S transfiere los datos.
-El periférico reconoce la recepción de los datos.
+1. El módulo de E/S envía una señal de control solicitando permiso para enviar
+   datos.
+2. El periférico reconoce la solicitud.
+3. El módulo de E/S transfiere los datos.
+4. El periférico reconoce la recepción de los datos.
 
 Para el funcionamiento del módulo de E/S, es clave disponer de un buffer interno
-que pueda almacenar los datos a transferir entre el periférico y el resto del sistema. Este
-buffer permite que el módulo de E/S pueda compensar las diferencias de velocidad entre
-el bus del sistema y sus líneas externas.
+que pueda almacenar los datos a transferir entre el periférico y el resto
+del sistema. Este buffer permite que el módulo de E/S pueda compensar las
+diferencias de velocidad entre el bus del sistema y sus líneas externas.
 
 La conexión entre un módulo de E/S del computador y los dispositivos externos
-puede ser punto-a-punto o multipunto. Una interfaz punto-a-punto proporciona una
-línea específica entre el módulo de E/S y el dispositivo externo. Existen usualmente este
-tipo de enlaces para el teclado, la impresora y el módem externo.
+puede ser punto-a-punto o multipunto. Una interfaz punto-a-punto proporciona
+una línea específica entre el módulo de E/S y el dispositivo externo. Existen
+usualmente este tipo de enlaces para el teclado, la impresora y el módem
+externo.
 
 Las interfaces externas multipunto, utilizadas para soportar dispositivos de
-almacenamiento masivos y dispositivos multimedia son, de hecho, buses externos, y
-poseen el mismo tipo de lógica que los mismos.
+almacenamiento masivos y dispositivos multimedia son, de hecho, buses externos,
+y poseen el mismo tipo de lógica que los mismos.
+
 Unidad 4: Subsistema de memoria.
+================================
 
 Memoria caché.
+--------------
 
 El objetivo de la memoria caché es lograr que la velocidad de la memoria sea lo
-más rápida posible. Hay una memoria principal relativamente grande y más lenta, junto
-con una memoria caché más pequeña y rápida. La caché contiene una copia de partes de
-la memoria principal. Cuando el procesador intenta leer una palabra de memoria, se
-hace una comprobación para determinar si la palabra está en la caché. Si es así, se
-entrega dicha palabra al procesador. Si no, un bloque de memoria principal, consistente
-en un cierto número de palabras, se transfiere a la caché y, después, la palabra es
-entregada al procesador. Debido al fenómeno de localidad de las referencias, cuando un
-bloque de datos es captado por la caché para satisfacer una referencia a memoria simple,
-es probable que se hagan referencias futuras a otras palabras del mismo bloque.
+más rápida posible. Hay una memoria principal relativamente grande y más lenta,
+junto con una memoria caché más pequeña y rápida. La caché contiene una copia de
+partes de la memoria principal. Cuando el procesador intenta leer una palabra
+de memoria, se hace una comprobación para determinar si la palabra está en la
+caché. Si es así, se entrega dicha palabra al procesador. Si no, un bloque de
+memoria principal, consistente en un cierto número de palabras, se transfiere a
+la caché y, después, la palabra es entregada al procesador. Debido al fenómeno
+de localidad de las referencias, cuando un bloque de datos es captado por la
+caché para satisfacer una referencia a memoria simple, es probable que se hagan
+referencias futuras a otras palabras del mismo bloque.
 
-La localidad espacial se refiere a la tendencia durante la ejecución a involucrar
-múltiples posiciones de memoria que estén agrupadas. La localidad espacial refleja la
-tendencia del procesador a acceder a las instrucciones secuencialmente, y también la
-tendencia de los programas a acceder a posiciones de datos consecutivas, como por
-ejemplo cuando se procesa una tabla de datos. La localidad temporal hace referencia a
-la tendencia del procesador a acceder a posiciones de memoria que han sido utilizadas
-recientemente. Por ejemplo, cuando se ejecutan iteraciones de un bucle, el procesador
-ejecuta repetidamente el mismo conjunto de instrucciones.
+La localidad espacial se refiere a la tendencia durante la ejecución a
+involucrar múltiples posiciones de memoria que estén agrupadas. La localidad
+espacial refleja la tendencia del procesador a acceder a las instrucciones
+secuencialmente, y también la tendencia de los programas a acceder a posiciones
+de datos consecutivas, como por ejemplo cuando se procesa una tabla de datos.
+La localidad temporal hace referencia a la tendencia del procesador a acceder a
+posiciones de memoria que han sido utilizadas recientemente. Por ejemplo, cuando
+se ejecutan iteraciones de un bucle, el procesador ejecuta repetidamente el
+mismo conjunto de instrucciones.
 
 La caché se conecta con el procesador mediante líneas de datos, de control y de
-direcciones. Las líneas de datos y de direcciones conectan también con buffers de datos
-y de direcciones que las comunican con un bus del sistema, a través del cual se accede a
-la memoria principal. Cuando ocurre un acierto de caché, los buffers de datos y de
-direcciones se inhabilitan, y la comunicación tiene lugar sólo entre el procesador y
-caché, sin tráfico en el bus. Cuando ocurre un fallo de caché, la dirección deseada se
-carga en el bus del sistema, y el dato es llevado, a través del buffer de datos, tanto a la
-caché como al procesador.
+direcciones. Las líneas de datos y de direcciones conectan también con buffers
+de datos y de direcciones que las comunican con un bus del sistema, a través
+del cual se accede a la memoria principal. Cuando ocurre un acierto de caché,
+los buffers de datos y de direcciones se inhabilitan, y la comunicación tiene
+lugar sólo entre el procesador y caché, sin tráfico en el bus. Cuando ocurre un
+fallo de caché, la dirección deseada se carga en el bus del sistema, y el dato
+es llevado, a través del buffer de datos, tanto a la caché como al procesador.
 
 Elementos de diseño de la caché.
-Tamaño de caché: nos gustaría que el tamaño fuera lo suficientemente pequeño
-como para que el coste total medio por bit se aproximara al de la memoria principal
-sola, y que fuera lo suficientemente grande como para que el tiempo de acceso medio
-total fuera próximo al de la caché. El resultado es que cachés grandes tienden a ser
-ligeramente más lentas que las pequeñas. El tamaño está también limitado por las
-superficies disponibles de chip y de tarjeta. Los tamaños óptimos de caché se
-encuentran entre 1K y 512K palabras.
-Función de correspondencia: ya que hay menos líneas de caché que bloques de
-memoria principal, se necesita un algoritmo que haga corresponder bloques de memoria
-principal a líneas de caché. Pueden utilizarse tres técnicas:
+--------------------------------
 
-Correspondencia directa: consiste en hacer corresponder cada bloque de
-memoria principal a sólo una línea posible de caché. Desde el punto de vista del
-acceso a caché, cada dirección de memoria principal puede verse como dividida
-en dos campos. Los bits menos significativos identifican cada palabra dentro de
-un bloque de memoria principal. Los bits restantes especifican uno de los bloques
-de memoria principal. Esta técnica es simple y poco costosa de implementar. Su
-principal desventaja es que hay una posición concreta de caché para cada bloque
-dado. Por ello, si un programa referencia repetidas veces a palabras de dos
-bloques diferentes asignados en la misma línea, dichos bloques se estarían
-intercambiando continuamente en la caché, y la tasa de aciertos sería baja.
+1. Tamaño de caché: nos gustaría que el tamaño fuera lo suficientemente pequeño
+   como para que el coste total medio por bit se aproximara al de la memoria
+   principal sola, y que fuera lo suficientemente grande como para que el
+   tiempo de acceso medio total fuera próximo al de la caché. El resultado es
+   que cachés grandes tienden a ser ligeramente más lentas que las pequeñas. El
+   tamaño está también limitado por las superficies disponibles de chip y de
+   tarjeta. Los tamaños óptimos de caché se encuentran entre 1K y 512K
+   palabras.
 
-Correspondencia asociativa: permite que cada bloque de memoria
-principal pueda cargarse en cualquier línea de la cache. La lógica de control de la
-caché interpreta una dirección de memoria simplemente como una etiqueta y un
-campo de palabra. El campo de etiqueta identifica unívocamente un bloque de
-memoria principal. Para determinar si un bloque está en la caché, su lógica de
-control debe examinar simultáneamente todas las etiquetas de líneas para buscar
-una coincidencia. Hay flexibilidad para que cualquier bloque sea reemplazado
-cuando se va a escribir uno nuevo en la caché. La principal desventaja es la
-compleja circuitería necesaria para examinar en paralelo las etiquetas de todas las
-líneas de caché.
+2. Función de correspondencia: ya que hay menos líneas de caché que bloques de
+   memoria principal, se necesita un algoritmo que haga corresponder bloques de
+   memoria principal a líneas de caché. Pueden utilizarse tres técnicas:
 
-Correspondencia asociativa por conjuntos: es una solución de
-compromiso que recoge lo positivo de las correspondencias directa y asociativa,
-sin presentar sus desventajas. En este caso, la caché se divide en conjuntos, cada
-uno de un número x de líneas. Un bloque puede asignarse en cualquiera de las
-líneas del conjunto. En este caso, la lógica de control de la caché interpreta una
-dirección de memoria como tres campos: etiqueta, conjunto y palabra. Los bits de
-conjunto especifican uno de los conjuntos. Los bits de campos de etiqueta y de
-palabra especifican uno de los bloques de memoria principal. Con la
-correspondencia asociativa por conjuntos, la etiqueta de una dirección de memoria
-es mucho más corta, y se compara sólo con las etiquetas dentro de un mismo
-conjunto. El uso de dos líneas por conjuntos es el caso más común, mejorando
-significativamente la tasa de aciertos respecto de la correspondencia directa.
+  * Correspondencia directa: consiste en hacer corresponder cada bloque de
+    memoria principal a sólo una línea posible de caché. Desde el punto de
+    vista del acceso a caché, cada dirección de memoria principal puede verse
+    como dividida en dos campos. Los bits menos significativos identifican cada
+    palabra dentro de un bloque de memoria principal. Los bits restantes
+    especifican uno de los bloques de memoria principal. Esta técnica es simple
+    y poco costosa de implementar. Su principal desventaja es que hay una
+    posición concreta de caché para cada bloque dado. Por ello, si un programa
+    referencia repetidas veces a palabras de dos bloques diferentes asignados
+    en la misma línea, dichos bloques se estarían intercambiando continuamente
+    en la caché, y la tasa de aciertos sería baja.
 
-Algoritmos de sustitución.
-Cuando se introduce un nuevo bloque en la caché, debe sustituirse uno de los
-bloques existentes. Para el caso de correspondencia directa, sólo hay una posible línea
-para cada bloque particular, y no hay elección posible. Para las técnicas asociativas, se
-requieren algoritmos de sustitución que deben implementarse en hardware.
-El más efectivo es probablemente el denominado "utilizado menos recientemente"
-(LRU): se sustituye el bloque que se ha mantenido en la caché por más tiempo sin haber
-sido referenciado. Esto es fácil de implementar para la asociativa por conjuntos de dos
-vías.
-Otra posibilidad es el "primero en entrar-primero en salir" (FIFO): se sustituye
-aquel bloque del conjunto que ha estado más tiempo en la caché. El algoritmo FIFO
-puede implementarse fácilmente mediante una técnica cíclica.
-En la política de "utilizado menos frecuentemente" (LFU), se sustituye aquel
-bloque del conjunto que ha experimentado menos referencias. LFU podría
-implementarse asociando un contador a cada línea.
-La última posibilidad es elegir una línea al azar entre las posibles candidatas.
+  * Correspondencia asociativa: permite que cada bloque de memoria principal
+    pueda cargarse en cualquier línea de la cache. La lógica de control de la
+    caché interpreta una dirección de memoria simplemente como una etiqueta y
+    un campo de palabra. El campo de etiqueta identifica unívocamente un bloque
+    de memoria principal. Para determinar si un bloque está en la caché, su
+    lógica de control debe examinar simultáneamente todas las etiquetas de
+    líneas para buscar una coincidencia. Hay flexibilidad para que cualquier
+    bloque sea reemplazado cuando se va a escribir uno nuevo en la caché. La
+    principal desventaja es la compleja circuitería necesaria para examinar en
+    paralelo las etiquetas de todas las líneas de caché.
 
-Política de escritura.
-Antes de que pueda ser reemplazado un bloque que está en una línea de caché, es
-necesario comprobar si ha sido alterado en caché pero no en memoria principal. Si no lo
-ha sido, puede escribirse sobre la línea de caché. Si ha sido modificado, esto significa
-que se ha realizado al menos una operación de escritura sobre una palabra de la línea
-correspondiente de la caché, y la memoria principal debe actualizarse de acuerdo con
-ello.
-La técnica más sencilla se denomina escritura inmediata. Utilizando esta técnica,
-todas las operaciones de escritura se hacen tanto en caché como en memoria principal,
-asegurando que el contenido de la memoria principal siempre es válido. La principal
-desventaja de esta técnica es que genera un tráfico sustancial a memoria que puede
-originar un cuello de botella.
+  * Correspondencia asociativa por conjuntos: es una solución de compromiso que
+    recoge lo positivo de las correspondencias directa y asociativa, sin
+    presentar sus desventajas. En este caso, la caché se divide en conjuntos,
+    cada uno de un número x de líneas. Un bloque puede asignarse en cualquiera
+    de las líneas del conjunto. En este caso, la lógica de control de la caché
+    interpreta una dirección de memoria como tres campos: etiqueta, conjunto y
+    palabra. Los bits de conjunto especifican uno de los conjuntos. Los bits de
+    campos de etiqueta y de palabra especifican uno de los bloques de memoria
+    principal. Con la correspondencia asociativa por conjuntos, la etiqueta de
+    una dirección de memoria es mucho más corta, y se compara sólo con las
+    etiquetas dentro de un mismo conjunto. El uso de dos líneas por conjuntos
+    es el caso más común, mejorando significativamente la tasa de aciertos
+    respecto de la correspondencia directa.
 
-Una técnica alternativa, es la post-escritura, que minimiza las escrituras en
-memoria. Las actualizaciones se hacen sólo en la caché. Cuando tiene lugar una
-actualización, se activa un bit ACTUALIZAR asociado a la línea. Después, cuando el
-bloque es sustituido, es escrito en memoria principal sólo si el bit ACTUALIZAR está
-activo. El problema es que a veces porciones de memoria principal no son válidas, y los
-accesos por parte de los módulos de E/S sólo podrían hacerse a través de la cache,
-complicando la circuitería.
+3. Algoritmos de sustitución.
 
-Tamaño de línea.
-Cuando se recupera y ubica en caché un bloque de datos, se recuperan no sólo la
-palabra deseada, sino además algunas palabras adyacentes. A medida que aumenta el
-tamaño de bloque, la tasa de aciertos primero aumenta debido al principio de localidad y
-más datos útiles son llevados a la caché. Sin embargo, la tasa de aciertos comenzará a
-decrecer.
-Dos efectos concretos entran en juego:
-Bloques más grandes reducen el número de bloques que caben en la caché.
-A medida que un bloque se hace más grande, cada palabra adicional está más
-lejos de la requerida, y por tanto es más improbable que sea necesaria a corto plazo.
-Un tamaño entre 4 y 8 unidades direccionables parece estar razonablemente
-próximo al óptimo
+  Cuando se introduce un nuevo bloque en la caché, debe sustituirse uno de los
+  bloques existentes. Para el caso de correspondencia directa, sólo hay una
+  posible línea para cada bloque particular, y no hay elección posible. Para
+  las técnicas asociativas, se requieren algoritmos de sustitución que deben
+  implementarse en hardware. El más efectivo es probablemente el denominado
+  "utilizado menos recientemente" (LRU): se sustituye el bloque que se ha
+  mantenido en la caché por más tiempo sin haber sido referenciado. Esto es
+  fácil de implementar para la asociativa por conjuntos de dos vías. Otra
+  posibilidad es el "primero en entrar-primero en salir" (FIFO): se sustituye
+  aquel bloque del conjunto que ha estado más tiempo en la caché. El algoritmo
+  FIFO puede implementarse fácilmente mediante una técnica cíclica. En la
+  política de "utilizado menos frecuentemente" (LFU), se sustituye aquel bloque
+  del conjunto que ha experimentado menos referencias. LFU podría implementarse
+  asociando un contador a cada línea. La última posibilidad es elegir una línea
+  al azar entre las posibles candidatas.
 
-Número de cachés.
-Cuando se introdujeron originalmente las cachés, un sistema tenía sólo una caché.
-Más recientemente, se ha convertido en una norma el uso de múltiples cachés.
-Ha sido posible tener una caché en el mismo chip del procesador, reduciendo la
-actividad del bus externo del procesador y los tiempos de ejecución e incrementando las
-prestaciones globales de sistema. Cuando la instrucción o dato requeridos se encuentran
-en la caché on-chip, se elimina el acceso al bus. Los accesos a la caché on-chip se
-efectúan apreciablemente más rápidos que los ciclos de bus y durante ese período el bus
-está libre para realizar otras transferencias.
-Los diseños más actuales incluyen tanto caché on-chip como externa. La
-estructura resultante se conoce como caché de dos niveles. Si no hay caché 2 y el
-procesador hace una petición de acceso a una posición de memoria que no está en la
-caché 1, entonces el procesador debe acceder a la RAM o la ROM a través del bus,
-obteniendo bajas prestaciones.
-Si se utiliza una caché 2, entonces, con frecuencia, la información puede
-recuperarse fácilmente. La mejora potencial del uso de una caché de dos niveles
-depende de las tasas de aciertos en ambas cachés. En general, el uso de un segundo
-nivel de caché mejora las prestaciones.
+4. Política de escritura.
 
-¿Unificada o partida?
-Al principio, se usaba una sola caché para almacenar las referencias, tanto a datos
-como a instrucciones. Actualmente se ha hecho normal separar la caché en dos: una
-dedicada a instrucciones y otra a datos.
-Una caché unificada tiene varias ventajas potenciales:
-Para un tamaño dado de caché, una unificada tiene una tasa de aciertos mayor
-que una partida, ya que nivela automáticamente la carga entre captación de
-instrucciones y de datos.
+  Antes de que pueda ser reemplazado un bloque que está en una línea de caché,
+  es necesario comprobar si ha sido alterado en caché pero no en memoria
+  principal. Si no lo ha sido, puede escribirse sobre la línea de caché. Si ha
+  sido modificado, esto significa que se ha realizado al menos una operación
+  de escritura sobre una palabra de la línea correspondiente de la caché, y la
+  memoria principal debe actualizarse de acuerdo con ello.
 
-Sólo se necesita diseñar e implementar una caché.
-La ventaja del diseño de caché partida es que elimina la competición por la caché
-entre el procesador de instrucciones y la unidad de ejecución. Esto es importante en
-diseños que cuentan con segmentación de cauce de instrucciones. Esta disputa por la
-caché puede degradar las prestaciones, interfiriendo con el uso eficiente del cauce
-segmentado de instrucciones. La caché partida supera esta dificultad.
+  La técnica más sencilla se denomina escritura inmediata. Utilizando esta
+  técnica, todas las operaciones de escritura se hacen tanto en caché como en
+  memoria principal, asegurando que el contenido de la memoria principal siempre
+  es válido. La principal desventaja de esta técnica es que genera un tráfico
+  sustancial a memoria que puede originar un cuello de botella.
+
+  Una técnica alternativa, es la post-escritura, que minimiza las escrituras en
+  memoria. Las actualizaciones se hacen sólo en la caché. Cuando tiene lugar
+  una actualización, se activa un bit ACTUALIZAR asociado a la línea. Después,
+  cuando el bloque es sustituido, es escrito en memoria principal sólo si el
+  bit ACTUALIZAR está activo. El problema es que a veces porciones de memoria
+  principal no son válidas, y los accesos por parte de los módulos de E/S sólo
+  podrían hacerse a través de la cache, complicando la circuitería.
+
+5. Tamaño de línea.
+
+  Cuando se recupera y ubica en caché un bloque de datos, se recuperan no
+  sólo la palabra deseada, sino además algunas palabras adyacentes. A medida
+  que aumenta el tamaño de bloque, la tasa de aciertos primero aumenta debido
+  al principio de localidad y más datos útiles son llevados a la caché. Sin
+  embargo, la tasa de aciertos comenzará a decrecer.
+
+  Dos efectos concretos entran en juego:
+
+  * Bloques más grandes reducen el número de bloques que caben en la caché.
+  * A medida que un bloque se hace más grande, cada palabra adicional está más
+    lejos de la requerida, y por tanto es más improbable que sea necesaria a
+    corto plazo. Un tamaño entre 4 y 8 unidades direccionables parece estar
+    razonablemente próximo al óptimo
+
+6. Número de cachés.
+
+  Cuando se introdujeron originalmente las cachés, un sistema tenía sólo una
+  caché. Más recientemente, se ha convertido en una norma el uso de múltiples
+  cachés. Ha sido posible tener una caché en el mismo chip del procesador,
+  reduciendo la actividad del bus externo del procesador y los tiempos de
+  ejecución e incrementando las prestaciones globales de sistema. Cuando la
+  instrucción o dato requeridos se encuentran en la caché on-chip, se elimina
+  el acceso al bus. Los accesos a la caché on-chip se efectúan apreciablemente
+  más rápidos que los ciclos de bus y durante ese período el bus está libre para
+  realizar otras transferencias. Los diseños más actuales incluyen tanto caché
+  on-chip como externa. La estructura resultante se conoce como caché de dos
+  niveles. Si no hay caché 2 y el procesador hace una petición de acceso a una
+  posición de memoria que no está en la caché 1, entonces el procesador debe
+  acceder a la RAM o la ROM a través del bus, obteniendo bajas prestaciones.
+  Si se utiliza una caché 2, entonces, con frecuencia, la información puede
+  recuperarse fácilmente. La mejora potencial del uso de una caché de dos
+  niveles depende de las tasas de aciertos en ambas cachés. En general, el uso
+  de un segundo nivel de caché mejora las prestaciones.
+
+7. ¿Unificada o partida?
+
+  Al principio, se usaba una sola caché para almacenar las referencias, tanto a
+  datos como a instrucciones. Actualmente se ha hecho normal separar la caché en
+  dos: una dedicada a instrucciones y otra a datos. Una caché unificada tiene
+  varias ventajas potenciales: Para un tamaño dado de caché, una unificada tiene
+  una tasa de aciertos mayor que una partida, ya que nivela automáticamente la
+  carga entre captación de instrucciones y de datos.
+
+  Sólo se necesita diseñar e implementar una caché.
+
+  La ventaja del diseño de caché partida es que elimina la competición por la
+  caché entre el procesador de instrucciones y la unidad de ejecución. Esto es
+  importante en diseños que cuentan con segmentación de cauce de instrucciones.
+  Esta disputa por la caché puede degradar las prestaciones, interfiriendo con
+  el uso eficiente del cauce segmentado de instrucciones. La caché partida
+  supera esta dificultad.
+
 Unidad 5: Paralelismo y mejora de prestaciones.
+===============================================
 
 El paralelismo adopta dos formas generales: paralelismo en el nivel de
-instrucciones y paralelismo en el nivel de procesador. En el primero, se aprovecha el
-paralelismo dentro de las instrucciones individuales para lograr que la máquina ejecute
-más instrucciones por segundo. En el segundo, múltiples CPU trabajan juntas en el
-mismo problema.
+instrucciones y paralelismo en el nivel de procesador. En el primero, se
+aprovecha el paralelismo dentro de las instrucciones individuales para lograr
+que la máquina ejecute más instrucciones por segundo. En el segundo, múltiples
+CPU trabajan juntas en el mismo problema.
 
 Procesadores superescalares.
+----------------------------
 
 Visión de conjunto.
 
@@ -1116,150 +1153,181 @@ manera independiente en diferentes cauces. El concepto puede llevarse más lejos
 permitiendo que las instrucciones se ejecuten en un orden diferente al del programa.
 
 Superescalar frente a supersegmentado.
+--------------------------------------
+
 Una solución alternativa para alcanzar mayores prestaciones es la llamada
-supersegmentación, que aprovecha el hecho de que muchas etapas del cauce realizan
-tareas que requieren menos de la mitad de un ciclo de reloj. De este modo, se dobla la
-velocidad de reloj interna, lo que permite la realización de dos tareas en un ciclo de reloj
-externo.
+supersegmentación, que aprovecha el hecho de que muchas etapas del cauce
+realizan tareas que requieren menos de la mitad de un ciclo de reloj. De este
+modo, se dobla la velocidad de reloj interna, lo que permite la realización de
+dos tareas en un ciclo de reloj externo.
+
 Las dos realizaciones, supersegmentada y superescalar, ejecutan el mismo número
-de instrucciones en el mismo tiempo cuando funcionan de forma ininterrumpida. El
-Procesador supersegmentado se queda atrás con respecto al procesador superescalar al
-comienzo del programa y en cada destino de un salto.
+de instrucciones en el mismo tiempo cuando funcionan de forma ininterrumpida.
+El Procesador supersegmentado se queda atrás con respecto al procesador
+superescalar al comienzo del programa y en cada destino de un salto.
 
 Limitaciones.
+-------------
+
 La aproximación superescalar depende de la habilidad para ejecutar múltiples
-instrucciones en paralelo. Para maximizar el paralelismo a nivel de instrucciones, se
-puede usar una combinación de optimizaciones realizadas por el compilador y de
-técnicas hardware.
+instrucciones en paralelo. Para maximizar el paralelismo a nivel de
+instrucciones, se puede usar una combinación de optimizaciones realizadas por el
+compilador y de técnicas hardware.
+
 Las limitaciones fundamentales del paralelismo a las que el sistema tiene que
 enfrentarse son:
-Dependencia de datos verdadera: una instrucción necesita un dato producido por
-una instrucción anterior. Cuando existe dependencia de datos, se retrasa la segunda
-instrucción tantos ciclos de reloj como sea necesario para eliminar la dependencia.
-Dependencia relativa al procedimiento: las instrucciones que siguen a una
-bifurcación tienen una dependencia relativa al procedimiento en esa bifurcación, y no
-pueden ejecutarse hasta que ésta lo haga.
-Conflictos por los recursos: pugna de dos o más instrucciones por el mismo
-recurso al mismo tiempo, como por ejemplo la memoria, caché, buses.
-Dependencia de salida: dos instrucciones S1 y S2 presentan dependencia de
-salida cuando ambas modifican el mismo recurso y S1 precede a S2.
-Antidependencia: una instrucción S2 es antidependiente de otra S1 si S2
-modifica un recurso que S1 lee y S1 precede a S2 en el orden de ejecución.
-Cuestiones relacionadas con el diseño.
+  * Dependencia de datos verdadera: una instrucción necesita un dato producido
+    por una instrucción anterior. Cuando existe dependencia de datos, se
+    retrasa la segunda instrucción tantos ciclos de reloj como sea necesario
+    para eliminar la dependencia.
+  * Dependencia relativa al procedimiento: las instrucciones que siguen a una
+    bifurcación tienen una dependencia relativa al procedimiento en esa
+    bifurcación, y no pueden ejecutarse hasta que ésta lo haga.
+  * Conflictos por los recursos: pugna de dos o más instrucciones por el mismo
+    recurso al mismo tiempo, como por ejemplo la memoria, caché, buses.
+  * Dependencia de salida: dos instrucciones S1 y S2 presentan dependencia de
+    salida cuando ambas modifican el mismo recurso y S1 precede a S2.
+  * Antidependencia: una instrucción S2 es antidependiente de otra S1 si S2
+    modifica un recurso que S1 lee y S1 precede a S2 en el orden de ejecución.
 
-Paralelismo a nivel de instrucciones y paralelismo de la máquina.
-Existe paralelismo a nivel de instrucciones cuando las instrucciones de una
-secuencia son independientes y, por tanto, pueden ejecutarse en paralelo solapándose.
+Cuestiones relacionadas con el diseño.
+--------------------------------------
+
+Paralelismo a nivel de instrucciones y paralelismo de la máquina. Existe
+paralelismo a nivel de instrucciones cuando las instrucciones de una secuencia
+son independientes y, por tanto, pueden ejecutarse en paralelo solapándose.
+
 El paralelismo a nivel de instrucciones depende de la frecuencia de dependencias
-de datos verdaderas y dependencias relativas al procedimiento que haya en el código.
-Estos factores dependen a su vez de la arquitectura del repertorio de instrucciones y de
-la aplicación. El paralelismo a nivel de instrucciones depende también de el tiempo que
-transcurre hasta que el resultado de una instrucción está disponible para ser usado como
-operando de una instrucción posterior.
+de datos verdaderas y dependencias relativas al procedimiento que haya en el
+código. Estos factores dependen a su vez de la arquitectura del repertorio
+de instrucciones y de la aplicación. El paralelismo a nivel de instrucciones
+depende también de el tiempo que transcurre hasta que el resultado de una
+instrucción está disponible para ser usado como operando de una instrucción
+posterior.
+
 El paralelismo de la máquina es una medida de la capacidad del procesador para
-sacar partido al paralelismo a nivel de instrucciones. Esto depende del número de
-instrucciones que pueden captarse y ejecutarse al mismo tiempo, y de la velocidad y
-sofisticación del mecanismo que usa el procesador para localizar instrucciones
-independientes.
+sacar partido al paralelismo a nivel de instrucciones. Esto depende del número
+de instrucciones que pueden captarse y ejecutarse al mismo tiempo, y de la
+velocidad y sofisticación del mecanismo que usa el procesador para localizar
+instrucciones independientes.
 
 Políticas de emisión de instrucciones.
-Las políticas de emisión de instrucciones de los procesadores superescales son las
-siguientes:
-Emisión en orden y finalización en orden: consiste en emitir instrucciones en el
-orden exacto en que lo haría una ejecución secuencial y escribir los resultados en ese
-mismo orden. Para garantizar la finalización en orden, cuando hay una pugna por una
-unidad funcional o cuando una unidad funcional necesita más de un ciclo para generar
-un resultado, la emisión de instrucciones se detiene temporalmente.
-Emisión en orden y finalización desordenada: con la finalización desordenada,
-puede haber cualquier número de instrucciones en la etapa de ejecución en un momento
-dado, hasta alcanzar el máximo grado de paralelismo de la máquina, ocupando todas las
-unidades funcionales. La emisión de instrucciones se para cuando hay una pugna por un
-recurso, una dependencia de datos o una relativa al procedimiento. También surge la
-dependencia de salida. Necesita una lógica de emisión de instrucciones más compleja
-que la finalización en orden y es más difícil ocuparse de las interrupciones.
-Emisión desordenada y finalización desordenada: para permitir la emisión
-desordenada, es necesario desacoplar las etapas del cauce de decodificación y ejecución.
-Esto se hace mediante un buffer llamado ventana de instrucciones. Con esta
-organización, cuando un procesador termina de decodificar una instrucción, coloca ésta
-en la ventana de instrucciones. Mientras el buffer no se llene, el procesador puede
-continuar captando y decodificando nuevas instrucciones. Cuando una unidad funcional
-de la etapa de ejecución queda disponible, se puede emitir una instrucción desde la
-ventana de instrucciones a la etapa de ejecución. Cualquier instrucción puede emitirse
-siempre que necesite la unidad funcional particular que está disponible y ningún
-conflicto ni dependencia la bloqueen.
+--------------------------------------
+
+Las políticas de emisión de instrucciones de los procesadores superescales son
+las siguientes:
+
+* Emisión en orden y finalización en orden: consiste en emitir instrucciones en
+    el orden exacto en que lo haría una ejecución secuencial y escribir los
+    resultados en ese mismo orden. Para garantizar la finalización en orden,
+    cuando hay una pugna por una unidad funcional o cuando una unidad funcional
+    necesita más de un ciclo para generar un resultado, la emisión de
+    instrucciones se detiene temporalmente.
+* Emisión en orden y finalización desordenada: con la finalización desordenada,
+    puede haber cualquier número de instrucciones en la etapa de ejecución en
+    un momento dado, hasta alcanzar el máximo grado de paralelismo de la
+    máquina, ocupando todas las unidades funcionales. La emisión de
+    instrucciones se para cuando hay una pugna por un recurso, una dependencia
+    de datos o una relativa al procedimiento. También surge la dependencia de
+    salida. Necesita una lógica de emisión de instrucciones más compleja que la
+    finalización en orden y es más difícil ocuparse de las interrupciones.
+* Emisión desordenada y finalización desordenada: para permitir la emisión
+    desordenada, es necesario desacoplar las etapas del cauce de decodificación
+    y ejecución. Esto se hace mediante un buffer llamado ventana de
+    instrucciones. Con esta organización, cuando un procesador termina de
+    decodificar una instrucción, coloca ésta en la ventana de instrucciones.
+    Mientras el buffer no se llene, el procesador puede continuar captando y
+    decodificando nuevas instrucciones. Cuando una unidad funcional de la etapa
+    de ejecución queda disponible, se puede emitir una instrucción desde la
+    ventana de instrucciones a la etapa de ejecución. Cualquier instrucción
+    puede emitirse siempre que necesite la unidad funcional particular que está
+    disponible y ningún conflicto ni dependencia la bloqueen.
 
 Renombramiento de registros.
-La emisión desordenada de instrucciones y la finalización desordenada, puede dar
-origen a dependencias de salida y antidependencias, que surgen porque los valores de
-los registros no pueden reflejar ya la secuencia de valores dictada por el flujo del
-programa.
+----------------------------
+
+La emisión desordenada de instrucciones y la finalización desordenada, puede
+dar origen a dependencias de salida y antidependencias, que surgen porque los
+valores de los registros no pueden reflejar ya la secuencia de valores dictada
+por el flujo del programa.
+
 Las antidependencias y las dependencias de salida son conflictos de
-almacenamiento. Varias instrucciones compiten por el uso de los mismos registros. Para
-hacer frente a este tipo de conflictos de almacenamiento, se usa una solución
-tradicional: el renombramiento de registros. En esta estrategia, el hardware del
-procesador asigna dinámicamente los registros. Cuando se ejecuta una instrucción que
-tiene un registro como operando destino, se asigna un nuevo registro para ese valor. Las
-instrucciones posteriores que accedan a ese valor como operando fuente en ese registro,
-tienen que sufrir un procedo de renombramiento: las referencias a registros de esas
-instrucciones han de revisarse para referenciar el registro que contiene el valor que se
-necesita. De este modo, las referencias a un mismo registro original en diferentes
+almacenamiento. Varias instrucciones compiten por el uso de los mismos
+registros. Para hacer frente a este tipo de conflictos de almacenamiento, se usa
+una solución tradicional: el renombramiento de registros. En esta estrategia,
+el hardware del procesador asigna dinámicamente los registros. Cuando se
+ejecuta una instrucción que tiene un registro como operando destino, se asigna
+un nuevo registro para ese valor. Las instrucciones posteriores que accedan a
+ese valor como operando fuente en ese registro, tienen que sufrir un procedo
+de renombramiento: las referencias a registros de esas instrucciones han de
+revisarse para referenciar el registro que contiene el valor que se necesita.
+De este modo, las referencias a un mismo registro original en diferentes
 instrucciones, pueden referirse a distintos registros reales.
 
 Ejecución superescalar.
-El proceso de captación de instrucciones, que incluye la predicción de saltos, se
-usa para formar un flujo dinámico de instrucciones. Se examinan las dependencias de
-este flujo, y el procesador puede eliminar las que sean artificiales.
-El procesador envía entonces las instrucciones a una ventana de ejecución. En esta
-ventana, las instrucciones ya no forman un flujo secuencial, sino que están estructuradas
-de acuerdo a sus dependencias de datos verdaderas. El procesador lleva a cabo la etapa
-de ejecución de cada instrucción en un orden determinado por las dependencias de datos
-verdaderas y la disponibilidad de los recursos hardware. Por último, las instrucciones se
-vuelven a poner conceptualmente en un orden secuencial y sus resultados se registran.
+-----------------------
+
+El proceso de captación de instrucciones, que incluye la predicción de
+saltos, se usa para formar un flujo dinámico de instrucciones. Se examinan
+las dependencias de este flujo, y el procesador puede eliminar las que sean
+artificiales. El procesador envía entonces las instrucciones a una ventana de
+ejecución. En esta ventana, las instrucciones ya no forman un flujo secuencial,
+sino que están estructuradas de acuerdo a sus dependencias de datos verdaderas.
+El procesador lleva a cabo la etapa de ejecución de cada instrucción en un
+orden determinado por las dependencias de datos verdaderas y la disponibilidad
+de los recursos hardware. Por último, las instrucciones se vuelven a poner
+conceptualmente en un orden secuencial y sus resultados se registran.
 
 Implementación superescalar.
-El hardware que requiere el procesador en la aproximación escalar debe cubrir los
-siguientes elementos principales:
-Estrategias de captación de instrucciones simultáneas.
-Lógica para determinar dependencias verdaderas entre valores de registros, y
-mecanismos para comunicar esos valores a donde sean necesarios durante la ejecución.
-Mecanismos para iniciar y emitir múltiples instrucciones en paralelo.
-Recursos para la ejecución en paralelo de múltiples instrucciones.
-Mecanismos para entregar el estado del procesador en un orden correcto.
+----------------------------
+
+El hardware que requiere el procesador en la aproximación escalar debe cubrir
+los siguientes elementos principales:
+* Estrategias de captación de instrucciones simultáneas.
+* Lógica para determinar dependencias verdaderas entre valores de registros, y
+    mecanismos para comunicar esos valores a donde sean necesarios durante la
+    ejecución.
+* Mecanismos para iniciar y emitir múltiples instrucciones en paralelo.
+* Recursos para la ejecución en paralelo de múltiples instrucciones.
+* Mecanismos para entregar el estado del procesador en un orden correcto.
 
 Procesamiento paralelo.
+-----------------------
 
-Tipos de sistemas paralelos.
-Una secuencia de instrucciones y una secuencia de datos (SISD): un único
-procesador interpreta una única secuencia de instrucciones, para operar con los datos
-almacenados en una única memoria. Ejemplo: computadora monoprocesador.
-Una secuencia de instrucciones y múltiples secuencias de datos (SIMD): una
-única instrucción máquina controla paso a paso la ejecución, simultánea y sincronizada
-de un cierto número de elementos de proceso. Cada elemento de proceso tiene una
-memoria asociada, de forma que cada instrucción es ejecutada por cada procesador, con
-un conjunto de datos diferentes. Ejemplos: procesadores vectoriales y matriciales.
-Múltiples secuencias de instrucciones y una secuencia de datos (MISD): se
-transmite una secuencia de datos a un conjunto de procesadores, cada uno de los cuales
+Tipos de sistemas paralelos. Una secuencia de instrucciones y una secuencia
+de datos (SISD): un único procesador interpreta una única secuencia de
+instrucciones, para operar con los datos almacenados en una única memoria.
+Ejemplo: computadora monoprocesador. Una secuencia de instrucciones y múltiples
+secuencias de datos (SIMD): una única instrucción máquina controla paso a
+paso la ejecución, simultánea y sincronizada de un cierto número de elementos
+de proceso. Cada elemento de proceso tiene una memoria asociada, de forma
+que cada instrucción es ejecutada por cada procesador, con un conjunto de
+datos diferentes. Ejemplos: procesadores vectoriales y matriciales. Múltiples
+secuencias de instrucciones y una secuencia de datos (MISD): se transmite
+una secuencia de datos a un conjunto de procesadores, cada uno de los cuales
 ejecuta una secuencia de instrucciones diferente. Esta estructura nunca ha sido
 implementada.
+
 Múltiples secuencias de instrucciones y múltiples secuencias de datos (MIMD):
 un conjunto de procesadores ejecuta simultáneamente secuencias de instrucciones
 diferentes con conjuntos de datos diferentes. Pueden ser de memoria compartida
 (ejemplos: SMP, sistemas NUMA) o de memoria distribuida (ejemplo: "clusters").
 
 Procesadores vectoriales.
+-------------------------
 
 Un procesador vectorial es un diseño de CPU capaz de ejecutar operaciones
-matemáticas sobre múltiples datos de forma simultánea. La gran mayoría de las CPU de
-hoy en día son escalares o superescalares. Los procesadores vectoriales son muy
-comunes en el área de la computación científica, formando la base de la mayor parte de
-las supercomputadoras durante los años 80 y 90.
+matemáticas sobre múltiples datos de forma simultánea. La gran mayoría de las
+CPU de hoy en día son escalares o superescalares. Los procesadores vectoriales
+son muy comunes en el área de la computación científica, formando la base de la
+mayor parte de las supercomputadoras durante los años 80 y 90.
 
-Los procesadores vectoriales proporcionan operaciones de alto nivel que trabajan
-sobre vectores. Una máquina vectorial consta de una unidad escalar segmentada y una
-unidad vectorial. La unidad vectorial dispone de M registros vectoriales de N elementos
-y de unidades funcionales vectoriales (de suma/resta, multiplicación, división, de
-carga/almacenamiento) que trabajan sobre los registros vectoriales, y un conjunto de
-registros escalares.
+Los procesadores vectoriales proporcionan operaciones de alto nivel que
+trabajan sobre vectores. Una máquina vectorial consta de una unidad escalar
+segmentada y una unidad vectorial. La unidad vectorial dispone de M registros
+vectoriales de N elementos y de unidades funcionales vectoriales (de suma/resta,
+multiplicación, división, de carga/almacenamiento) que trabajan sobre los
+registros vectoriales, y un conjunto de registros escalares.
 
 Una operación vectorial equivale a un bucle completo que procesaría los N
 elementos del registro vectorial.
